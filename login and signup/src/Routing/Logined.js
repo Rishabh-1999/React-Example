@@ -1,20 +1,15 @@
-import React from 'react';
+import React from "react";
 
-class App extends React.Component {
-    state={
+class Logined extends React.Component {
+  state = {};
 
-    }
-
-    
-
-    render()
-    {
-      return (
-        <div className="container">
-            <h1>Logined</h1>
-        </div>
-      )
-    }
+  render() {
+    return (
+      <div className="container">
+        <h1>Logined</h1>
+      </div>
+    );
   }
-  
-  export default App;
+}
+
+export default Logined;

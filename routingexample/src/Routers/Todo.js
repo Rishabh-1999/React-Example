@@ -1,57 +1,62 @@
-import React from 'react';
+import React from "react";
 
-import Input1 from '../Components/input/index'
-import Button1 from '../Components/button/button'
-import List1 from '../Components/List/List'
+/* Components */
+import Input from "../Components/Input";
+import Button from "../Components/Button";
+import List from "../Components/List";
 
-class Todo extends React.Component
-{
-  componentDidMount()
-  {
+class Todo extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.deleteTodo = this.deleteTodo.bind(this);
+    this.saveTodo = this.saveTodo.bind(this);
+  }
+
+  componentDidMount() {
     console.log("On");
   }
-  componentDidUnMount()
-  {
+  componentDidUnMount() {
     console.log("Off");
   }
-  state={
-    a:"",
-    todo:[],
-  }
+  state = {
+    text: "",
+    todo: [],
+  };
 
-  handleInput = (e)=>
-  {
+  handleInput = (e) => {
     const value = e.target.value;
-    this.setState({a:value})
-  }
+    this.setState({ text: value });
+  };
 
-  deleteli = (i)=>
-  {
+  deleteTodo = (i) => {
     return () => {
-    const {todo}=this.state;
-    todo.splice(i,1);
-    this.setState({todo:todo});
-    }
-  }
+      const { todo } = this.state;
+      todo.splice(i, 1);
+      this.setState({ todo: todo });
+    };
+  };
 
-  savetodo = (e)=>
-  {
-    const {a,todo} = this.state;
-    todo.push(a);
-    this.setState({todo:todo,a:""})
-    console.log(todo)
-  }
+  saveTodo = (e) => {
+    const { text, todo } = this.state;
+    todo.push(text);
+    this.setState({ todo: todo, text: "" });
+    console.log(todo);
+  };
 
-  render()
-  {
-    const {a,todo} = this.state;
+  render() {
+    const { text, todo } = this.state;
     return (
       <div>
-        <Input1 data={a} change={this.handleInput} placeholder="Enter Value" />
-        <Button1 buttononclick={this.savetodo} />
-        <List1 todo={todo} deleteli={this.deleteli} />
+        <Input
+          data={text}
+          change={this.handleInput}
+          placeholder="Enter Value"
+        />
+        <Button saveTodo={this.saveTodo} />
+        <List todo={todo} deleteTodo={this.deleteTodo} />
       </div>
-    )
+    );
   }
 }
 

@@ -1,50 +1,52 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
-import Input1 from './Components/input/index'
-import Button1 from './Components/button/button'
-import List1 from './Components/List/List'
+import React from "react";
 
-class App extends React.Component
-{
-  state={
-    a:"",
-    todo:[],
-  }
+/* Styles */
+import "./App.css";
 
-  handleInput = (e)=>
-  {
+/* Components */
+import InputField from "./Components/InputField/index";
+import Button from "./Components/Button";
+import List from "./Components/List";
+
+class App extends React.Component {
+  state = {
+    text: "",
+    todo: [],
+  };
+
+  handleInput = (e) => {
     const value = e.target.value;
-    this.setState({a:value})
-  }
+    this.setState({ text: value });
+  };
 
-  deleteli = (i)=>
-  {
+  deleteTodo = (i) => {
     return () => {
-    const {todo}=this.state;
-    todo.splice(i,1);
-    this.setState({todo:todo});
-    }
-  }
+      const { todo } = this.state;
+      todo.splice(i, 1);
+      this.setState({ todo: todo });
+    };
+  };
 
-  savetodo = (e)=>
-  {
-    const {a,todo} = this.state;
-    todo.push(a);
-    this.setState({todo:todo,a:""})
-    console.log(todo)
-  }
+  savetodo = () => {
+    const { text, todo } = this.state;
+    todo.push(text);
+    this.setState({ todo: todo, text: "" });
+    console.log(todo);
+  };
 
-  render()
-  {
-    const {a,todo} = this.state;
+  render() {
+    const { text, todo } = this.state;
     return (
       <div>
-        <Input1 data={a} change={this.handleInput} placeholder="Enter Value" />
-        <Button1 buttononclick={this.savetodo} />
-        <List1 todo={todo} deleteli={this.deleteli} />
+        <InputField
+          text={text}
+          onChange={this.handleInput}
+          placeholder="Enter Value"
+        />
+        <Button onClick={this.savetodo} />
+        <List todoLists={todo} deleteTodo={this.deleteTodo} />
       </div>
-    )
+    );
   }
 }
 
